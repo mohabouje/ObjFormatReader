@@ -92,8 +92,9 @@ ObjFormatReader::Error ObjFormatReader::load_file(const std::string &file_path) 
 
 
 
-template<class _Container>
-vector<Vertex> ObjFormatReader::load_vertices_from_face(const _Container &face_line) {
+template <typename T, template <typename, typename = allocator<T>> class _Container>
+typename std::enable_if<std::is_same<std::basic_string<char>, T>::value, vector<Vertex>>::type
+ObjFormatReader::load_vertices_from_face(const _Container<T> &face_line) {
     vector<Vertex> vertices;
     for (const auto &it : face_line) {
         auto count = utility::parser::split_slash<std::vector<std::string>, std::string>(it);
@@ -117,9 +118,6 @@ vector<Vertex> ObjFormatReader::load_vertices_from_face(const _Container &face_l
     return vertices;
 
 }
-
-
-
 
 ostream &operator<<(ostream &os, const ObjFormatReader &reader) {
     auto time = chrono::system_clock::to_time_t(chrono::system_clock::now());

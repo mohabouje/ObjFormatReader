@@ -23,8 +23,9 @@ private:
     Obj obj;
 
 
-    template<class _Container>
-    inline std::vector<Vertex> load_vertices_from_face(const _Container &face_line);
+    template <typename T, template <typename, typename = std::allocator<T>> class Container>
+    inline typename std::enable_if<std::is_same<std::basic_string<char>, T>::value, std::vector<Vertex>>::type
+    load_vertices_from_face(const Container<T> &face_line);
 
 };
 
