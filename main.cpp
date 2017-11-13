@@ -1,5 +1,6 @@
 #include <iostream>
 #include "structs.h"
+#include "utility.h"
 
 int main() {
     std::cout << "Hello, World!" << std::endl;

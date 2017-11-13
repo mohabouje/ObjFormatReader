@@ -29,6 +29,7 @@ using sample = double;
 using sample = float;
 #endif
 
+#include "utility.h"
 
 #include <array>
 #include <numeric>
@@ -56,10 +57,10 @@ using Index = size_t;
 // TODO: we can save the position in the global buffer of any fiels instead of copy everithing.
 struct Vertex {
     enum VertexType { JustPos = 1, PosAndTCoord, PosTCoordAndNormal};
-    Vertex()  = default;
-    explicit Vertex(const ObjPosition &v) : v(v) {}
-    Vertex(const ObjPosition &v, const ObjVn &vn) : v(v), vn(vn) {}
-    Vertex(const ObjPosition &v, const ObjVn &vn, const ObjVt &vt) : v(v), vn(vn), vt(vt) {}
+    constexpr Vertex()  = default;
+    constexpr Vertex(const ObjPosition &v) : v(v) {}
+    constexpr Vertex(const ObjPosition &v, const ObjVn &vn) : v(v), vn(vn) {}
+    constexpr Vertex(const ObjPosition &v, const ObjVn &vn, const ObjVt &vt) : v(v), vn(vn), vt(vt) {}
 
     ObjPosition v{};
     ObjVn vn{};
@@ -93,6 +94,7 @@ using VertexSet = std::set<Vertex>;
 using VertexUSet = std::unordered_set<Vertex, VertexHash>;
 
 
+enum Axis { AxisX, AxisY, AxisZ};
 struct Obj {
     enum SupportedFaces  { Triangles = 3, Sguares = 4 };
     friend std::ostream &operator<<(std::ostream &os, const Obj &obj) {
@@ -106,6 +108,19 @@ struct Obj {
         os << std::endl;
         return os;
     }
+
+    inline sample width() const {
+        return utility::algorithm::distance_minmaxelement_at(v, Axis::AxisX);
+    }
+
+    inline sample height() const {
+        return utility::algorithm::distance_minmaxelement_at(v, Axis::AxisY);
+    }
+
+    inline sample weight() const {
+        return utility::algorithm::distance_minmaxelement_at(v, Axis::AxisZ);
+    }
+
 
     // TODO: same situation: check the best container for any case, for quick search and push_back list give better behaviout than vector, but we lost the random access.
     std::list<Vertex>           vertices{};
