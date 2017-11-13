@@ -52,12 +52,24 @@ ObjFormatReader::Error ObjFormatReader::load_file(const std::string &file_path) 
             case ObjCommands::UseMtl:
                 break;
             case ObjCommands::Position:
+                obj.v.push_back(
+                        utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 4>(tokens.begin(),
+                                                                                                 tokens.end()));
                 break;
             case ObjCommands::Normal:
+                obj.vn.push_back(
+                        utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 3>(tokens.begin(),
+                                                                                                 tokens.end()));
                 break;
             case ObjCommands::TextureCoordinates:
+                obj.vt.push_back(
+                        utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 3>(tokens.begin(),
+                                                                                                 tokens.end()));
                 break;
             case ObjCommands::ParameterSpace:
+                obj.vp.push_back(
+                        utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 3>(tokens.begin(),
+                                                                                                 tokens.end()));
                 break;
             case ObjCommands::Face:
                 break;
