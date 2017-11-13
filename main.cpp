@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
 
 
     if (print) {
-
+        std::cout << reader << std::endl;
     }
 
     return 0;

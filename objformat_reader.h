@@ -15,6 +15,7 @@ public:
     };
     ObjFormatReader() = default;
     virtual ~ObjFormatReader() = default;
+    friend std::ostream &operator<<(std::ostream &os, const ObjFormatReader &reader);
     Error load_file(const std::string& file_path);
     inline const Obj& object() const { return obj; }
     inline Obj* object() { return &obj; }

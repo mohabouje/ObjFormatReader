@@ -5,6 +5,8 @@
 
 #include <fstream>
 #include <map>
+#include <chrono>
+
 using namespace std;
 
 enum ObjCommands {
@@ -85,4 +87,11 @@ ObjFormatReader::Error ObjFormatReader::load_file(const std::string &file_path) 
 
     file.close();
     return NoError;
+}
+
+ostream &operator<<(ostream &os, const ObjFormatReader &reader) {
+    auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    os << "File parsed at " << std::ctime(&time) << endl;
+    os << reader.obj << endl;
+    return os;
 }
