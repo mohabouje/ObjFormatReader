@@ -94,7 +94,7 @@ using VertexSet = std::set<Vertex>;
 using VertexUSet = std::unordered_set<Vertex, VertexHash>;
 
 
-enum Axis { AxisX, AxisY, AxisZ};
+enum Axis { AxisX = 0, AxisY, AxisZ};
 struct Obj {
     enum SupportedFaces  { Triangles = 3, Sguares = 4 };
     friend std::ostream &operator<<(std::ostream &os, const Obj &obj) {
@@ -105,6 +105,9 @@ struct Obj {
         os << "Number of vertices in faces: " << obj.vertices.size() << std::endl;
         os << "Number of indexes to plot: " << obj.indexes.size() << std::endl;
         os << "Number of triangles: " << obj.indexes.size() / Triangles << std::endl;
+        os << "X Size: " << obj.width() << std::endl;
+        os << "Y Size: " << obj.height() << std::endl;
+        os << "Z Size: " << obj.weigth() << std::endl;
         os << std::endl;
         return os;
     }
@@ -117,7 +120,7 @@ struct Obj {
         return utility::algorithm::distance_minmaxelement_at(v, Axis::AxisY);
     }
 
-    inline sample weight() const {
+    inline sample weigth() const {
         return utility::algorithm::distance_minmaxelement_at(v, Axis::AxisZ);
     }
 

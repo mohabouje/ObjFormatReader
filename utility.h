@@ -18,7 +18,7 @@ namespace utility {
     namespace algorithm {
         template<class Array, template<typename, typename = std::allocator<Array>> class Container>
         constexpr auto maxelement_at(const Container<Array> &container, size_t index) {
-            assert(index >= container.size());
+            assert(index < container.size());
             auto iter = std::max_element(std::begin(container),
                                          std::end(container), [&index](const Array &lhs, const Array &rhs) {
                         return lhs[index] < rhs[index];
@@ -28,7 +28,7 @@ namespace utility {
 
         template<class Array, template<typename, typename = std::allocator<Array>> class Container>
         constexpr auto minelement_at(const Container<Array> &container, size_t index) {
-            assert(index >= container.size());
+            assert(index < container.size());
             auto iter = std::max_element(std::begin(container),
                                          std::end(container), [&index](const Array &lhs, const Array &rhs) {
                         return lhs[index] > rhs[index];
@@ -39,7 +39,7 @@ namespace utility {
 
         template<class Array, template<typename, typename = std::allocator<Array>> class Container>
         constexpr auto minmaxelement_at(const Container<Array> &container, size_t index) {
-            assert(index >= container.size());
+            assert(index < container.size());
             return std::minmax_element(std::begin(container),
                                             std::end(container), [&index](const Array &lhs, const Array &rhs) {
                         return lhs[index] > rhs[index];
@@ -48,7 +48,7 @@ namespace utility {
 
         template<class Array, template<typename, typename = std::allocator<Array>> class Container>
         constexpr typename Array::value_type distance_minmaxelement_at(const Container<Array> &container, size_t index) {
-            assert(index >= container.size());
+            assert(index < container.size());
             auto iter = minmaxelement_at(container, index);
             return (*iter.first)[index] - (*iter.second)[index];
         };
