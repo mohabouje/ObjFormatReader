@@ -41,11 +41,11 @@ ObjFormatReader::Error ObjFormatReader::load_file(const std::string &file_path) 
 
     string current_line;
     while (getline(file, current_line)) {
-        auto tokens = utility::parser::split_space<list<string>>(current_line);
+        auto tokens = utility::parser::split_space<vector<string>, std::string>(current_line);
         auto elements = tokens.size();
         if (!elements) continue;
 
-        const string& command = tokens.front(); tokens.pop_front();
+        const string command = tokens.front(); tokens.erase(tokens.begin());
         switch (Command[command]) {
             case ObjCommands::Definition:
                 break;
@@ -54,25 +54,25 @@ ObjFormatReader::Error ObjFormatReader::load_file(const std::string &file_path) 
             case ObjCommands::Position:
                 assert(elements >= 4 && "Expecting 3 parameters for the v parameter, format: v [x] [y] [z] [w| optional]");
                 obj.v.push_back(
-                        utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 4>(tokens.begin(),
+                        utility::parser::to_arithmetic_array<vector<string>::const_iterator, sample, 4>(tokens.begin(),
                                                                                                  tokens.end()));
                 break;
             case ObjCommands::Normal:
                 assert(elements >= 4 && "Expecting 3 parameters for the vn parameter, format: vn [x] [y] [z]");
                 obj.vn.push_back(
-                        utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 3>(tokens.begin(),
+                        utility::parser::to_arithmetic_array<vector<string>::const_iterator, sample, 3>(tokens.begin(),
                                                                                                  tokens.end()));
                 break;
             case ObjCommands::TextureCoordinates:
                 assert(elements >= 3 && "Expecting 2 parameters for the vt paramters, format: vt [x] [y] w| optional]");
                 obj.vt.push_back(
-                        utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 3>(tokens.begin(),
+                        utility::parser::to_arithmetic_array<vector<string>::const_iterator, sample, 3>(tokens.begin(),
                                                                                                  tokens.end()));
                 break;
             case ObjCommands::ParameterSpace:
                 assert(elements >= 3 && "Expecting 2 parameters for the vp parameters, format: vn [x] [y] [z]");
                 obj.vp.push_back(
-                        utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 3>(tokens.begin(),
+                        utility::parser::to_arithmetic_array<vector<string>::const_iterator, sample, 3>(tokens.begin(),
                                                                                                  tokens.end()));
                 break;
             case ObjCommands::Face:
