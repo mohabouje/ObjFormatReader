@@ -103,12 +103,28 @@ namespace utility {
         }
 
 
+        template<typename C, typename T = std::basic_string<char>>
+        inline typename std::enable_if<std::is_same<std::basic_string<char>, T>::value ||
+                                       std::is_same<std::basic_string<wchar_t>, T>::value, C>::type
+        parse_string(const T& str) {
+            if (std::is_same<C, float>::value) return std::stof(str);
+            else if (std::is_same<C, double>::value) return std::stod(str);
+            else if (std::is_same<C, int>::value) return std::stoi(str);
+            else if (std::is_same<C, long double>::value) return std::stold(str);
+            else if (std::is_same<C, float>::value) return std::stof(str);
+            else if (std::is_same<C, long>::value) return std::stol(str);
+            else if (std::is_same<C, unsigned long>::value) return std::stoul(str);
+            else if (std::is_same<C, long long>::value) return std::stoll(str);
+            else if (std::is_same<C, unsigned long long>::value) return std::stoull(str);
+            else return 0;
+        };
+
         template <class _ForwardIterator, typename T, std::size_t N>
         constexpr typename std::enable_if<std::is_arithmetic<T>::value, std::array<T,N>>::type
         to_arithmetic_array(const _ForwardIterator& b, const _ForwardIterator& e)  {
             std::array<T,N> tmp;
             std::transform(b, e, std::begin(tmp), [](const std::string& str) {
-                return static_cast<T>(std::stod(str));
+                return parse_string<T>(str);
             });
             return tmp;
         };
