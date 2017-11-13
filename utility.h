@@ -102,6 +102,17 @@ namespace utility {
             return imploded.str();
         }
 
+
+        template <class _ForwardIterator, typename T, std::size_t N>
+        constexpr typename std::enable_if<std::is_arithmetic<T>::value, std::array<T,N>>::type
+        to_arithmetic_array(const _ForwardIterator& b, const _ForwardIterator& e)  {
+            std::array<T,N> tmp;
+            std::transform(b, e, std::begin(tmp), [](const std::string& str) {
+                return static_cast<T>(std::stod(str));
+            });
+            return tmp;
+        };
+
     }
 
 
@@ -111,7 +122,7 @@ namespace utility {
         inline typename std::enable_if<std::is_same<std::basic_string<char>, T>::value ||
                                 std::is_same<char const*, T>::value, bool>::type
         file_exist(const T& name) {
-            struct stat buffer;
+            struct stat buffer{};
             return (stat (&name[0], &buffer) == 0);
         }
 
