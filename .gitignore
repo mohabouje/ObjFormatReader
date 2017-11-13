@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Ignore some files drom CLion
+.idea/
+cmake-build-debug/
