@@ -76,6 +76,8 @@ ObjFormatReader::Error ObjFormatReader::load_file(const std::string &file_path) 
                                                                                                  tokens.end()));
                 break;
             case ObjCommands::Face:
+                assert(elements > 3 && elements <= 5 && "Invalid face, supported triangles and squares");
+                load_vertices_from_face(tokens);
                 break;
             default:
                 break;
@@ -86,6 +88,37 @@ ObjFormatReader::Error ObjFormatReader::load_file(const std::string &file_path) 
     file.close();
     return NoError;
 }
+
+
+
+template<class _Container>
+vector<Vertex> ObjFormatReader::load_vertices_from_face(const _Container &face_line) {
+    vector<Vertex> vertices;
+    for (const auto &it : face_line) {
+        auto count = utility::parser::split_slash<std::list<std::string>>(it);
+        auto tmp = utility::parser::to_arithmetic_array<std::list<std::string>::const_iterator, Index, 3>(count.begin(), count.end());
+        const Vertex v = [&, size = count.size()]() -> Vertex {
+            switch (size) {
+                case Vertex::JustPos:
+                    return Vertex(obj.v[tmp[0]]);
+                case Vertex::PosAndTCoord:
+                    return Vertex(obj.v[tmp[0]], obj.vt[tmp[1]]);
+                case Vertex::PosTCoordAndNormal:
+                    return Vertex(obj.v[tmp[0]], obj.vt[tmp[1]], obj.vn[tmp[2]]);
+                default:
+                    assert(false && "Invalid vertex for face");
+                    return Vertex();
+
+            }
+        }();
+        vertices.emplace_back(v);
+    }
+    return vertices;
+
+}
+
+
+
 
 ostream &operator<<(ostream &os, const ObjFormatReader &reader) {
     auto time = chrono::system_clock::to_time_t(chrono::system_clock::now());

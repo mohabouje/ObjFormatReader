@@ -22,6 +22,10 @@ public:
 private:
     Obj obj;
 
+
+    template<class _Container>
+    inline std::vector<Vertex> load_vertices_from_face(const _Container &face_line);
+
 };
 
 
