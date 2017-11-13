@@ -25,8 +25,8 @@ static map<string, ObjCommands> Command = {
         {"g", ObjCommands::Definition},
         {"usemtl", ObjCommands::UseMtl},
         {"v", ObjCommands::Position},
-        {"vt", ObjCommands::Normal},
-        {"vn", ObjCommands::TextureCoordinates},
+        {"vn", ObjCommands::Normal},
+        {"vt", ObjCommands::TextureCoordinates},
         {"vp", ObjCommands::ParameterSpace},
         {"f", ObjCommands::Face}
 };
