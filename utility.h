@@ -47,6 +47,25 @@ namespace utility {
             auto iter = minmaxelement_at(container, index);
             return (*iter.first)[index] - (*iter.second)[index];
         };
+
+        template <class T>
+        constexpr bool is_equal(const T& lhs, const T& rhs) {
+            return (lhs == rhs);
+        }
+
+    }
+
+
+    namespace filesystem {
+
+        inline std::string file_format(const std::string& name) {
+            size_t period = name.find_last_of("."), until_end = (name.size() - period);
+            return name.substr(period, until_end);
+        }
+
+        inline bool is_format_supported(const std::string& file, const std::string& format) {
+            return algorithm::is_equal(file_format(file), format);
+        }
     }
 }
 
