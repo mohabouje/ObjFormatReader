@@ -10,6 +10,7 @@ void print_help() {
 
 int main(int argc, char** argv) {
     if (argc == 1) {
+        std::cerr << "Required field: --obj" << std::endl;
         print_help();
         return -1;
     };
@@ -29,18 +30,39 @@ int main(int argc, char** argv) {
     }
 
     if (file_path.empty()) {
-        std::cout << "Required field: --obj" << std::endl;
+        std::cerr << "Required field: --obj" << std::endl;
         print_help();
         return -1;
     }
 
 
     ObjFormatReader reader;
-
+    const ObjFormatReader::Error error = reader.load_file(file_path);
+    switch (error) {
+        case ObjFormatReader::NoError:
+            std::cout << "File loaded with success =)" << std::endl;
+            break;
+        case ObjFormatReader::FileEmpty:
+            std::cerr << "Error: empty file" << std::endl;
+            break;
+        case ObjFormatReader::FileNotExist:
+            std::cerr << "Error: file not exist" << std::endl;
+            break;
+        case ObjFormatReader::FormatNotSupported:
+            std::cerr << "Error: format not supported" << std::endl;
+            break;
+        case ObjFormatReader::FileUnrecheable:
+            std::cerr << "Error: could not open the file" << std::endl;
+            break;
+        case ObjFormatReader::Unknown:
+        default:
+            std::cerr << "Error: Unknown error =(" << std::endl;
+            break;
+    }
 
     if (print) {
         std::cout << reader << std::endl;
     }
 
-    return 0;
+    return error;
 }
