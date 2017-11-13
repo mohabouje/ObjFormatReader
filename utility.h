@@ -5,9 +5,13 @@
 #ifndef OBJFORMATREADER_UTILITY_H
 #define OBJFORMATREADER_UTILITY_H
 
+class value;
+
 #include <memory>
 #include <assert.h>
 #include <array>
+#include <type_traits>
+#include <sys/stat.h>
 
 namespace utility {
     namespace algorithm {
@@ -57,6 +61,13 @@ namespace utility {
 
 
     namespace filesystem {
+
+        template<typename T>
+        typename std::enable_if<std::is_same<std::string const &, T>::value ||
+                                std::is_same<char const *, T>::value, bool>::type file_exist(const T& name) {
+            struct stat buffer;
+            return (stat (&name[0], &buffer) == 0);
+        }
 
         inline std::string file_format(const std::string& name) {
             size_t period = name.find_last_of("."), until_end = (name.size() - period);
