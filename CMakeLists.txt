@@ -3,5 +3,5 @@ project(ObjFormatReader)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp structs.h)
 add_executable(ObjFormatReader ${SOURCE_FILES})
