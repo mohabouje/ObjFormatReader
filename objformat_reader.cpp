@@ -75,12 +75,11 @@ ObjFormatReader::Error ObjFormatReader::load_file(const std::string &file_path) 
                         utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 3>(tokens.begin(),
                                                                                                  tokens.end()));
                 break;
-            case ObjCommands::Face: {
+            case ObjCommands::Face:
                 assert(elements > 3 && elements <= 5 && "Invalid face, supported triangles and squares");
-                auto vertices = load_vertices_from_face(tokens);
-                obj.vertices.insert(std::end(obj.vertices), std::begin(vertices), std::end(vertices));
+                vertices_triangle_fan(load_vertices_from_face(tokens));
                 break;
-            } default:
+            default:
                 break;
 
         }
@@ -92,9 +91,9 @@ ObjFormatReader::Error ObjFormatReader::load_file(const std::string &file_path) 
 
 
 
-template <typename T, template <typename, typename = allocator<T>> class _Container>
-typename std::enable_if<std::is_same<std::basic_string<char>, T>::value, vector<Vertex>>::type
-ObjFormatReader::load_vertices_from_face(const _Container<T> &face_line) {
+template <typename T, template <typename, typename = allocator<T>> class Container>
+typename std::enable_if<std::is_same<std::basic_string<char>, T>::value, std::vector<Vertex>>::type
+ObjFormatReader::load_vertices_from_face(const Container<T> &face_line) {
     vector<Vertex> vertices;
     for (const auto &it : face_line) {
         auto count = utility::parser::split_slash<std::vector<std::string>, std::string>(it);
@@ -116,8 +115,25 @@ ObjFormatReader::load_vertices_from_face(const _Container<T> &face_line) {
         vertices.emplace_back(v);
     }
     return vertices;
-
 }
+
+
+template <typename T, template <typename, typename = allocator<T>> class Container>
+typename std::enable_if<std::is_same<Vertex, T>::value, void>::type
+ObjFormatReader::vertices_triangle_fan(const Container<T> &vertices) {
+    assert((vertices.size() >= 3 && vertices.size() <= 4) && "Format nor suported, expect: v/vt/vn v/vt/vn v/vt/vn (v/vt/vn, optional)");
+    const size_t size = vertices.size(), gsize = obj.vertices.size();
+    if (size < Obj::Triangles) return;
+
+    auto indexes =  (vertices.size() == Obj::Triangles) ? initializer_list<Index> ({gsize + 0, gsize + 1, gsize + 2})
+                                    : initializer_list<Index> ({gsize + 0, gsize + 1, gsize + 2, gsize + 0, gsize + 2, gsize + 3});
+
+    // TODO: check if the vertex was added in the buffer previously;
+    obj.vertices.insert(end(obj.vertices), begin(vertices), end(vertices));
+    obj.indexes.insert(end(obj.indexes), begin(indexes), end(indexes));
+}
+
+
 
 ostream &operator<<(ostream &os, const ObjFormatReader &reader) {
     auto time = chrono::system_clock::to_time_t(chrono::system_clock::now());

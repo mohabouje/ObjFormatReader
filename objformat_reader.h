@@ -27,6 +27,10 @@ private:
     inline typename std::enable_if<std::is_same<std::basic_string<char>, T>::value, std::vector<Vertex>>::type
     load_vertices_from_face(const Container<T> &face_line);
 
+    template <typename T, template <typename, typename = std::allocator<T>> class Container>
+    typename std::enable_if<std::is_same<Vertex, T>::value, void>::type
+    vertices_triangle_fan(const Container<T> &vertices);
+
 };
 
 
