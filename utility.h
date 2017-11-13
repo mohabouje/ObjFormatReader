@@ -62,7 +62,7 @@ namespace utility {
 
     namespace parser {
         template<class _Container, typename _InputArray = std::string>
-        inline typename std::enable_if<std::is_same<std::string const &, _InputArray>::value ||
+        inline typename std::enable_if<std::is_same<std::basic_string<char>, _InputArray>::value ||
                                        std::is_same<char const *, _InputArray>::value, _Container>::type
         split_space(const _InputArray &sequence) {
             _Container list;
@@ -75,7 +75,7 @@ namespace utility {
 
 
         template<class _Container, typename _InputArray = std::string>
-        inline typename std::enable_if<std::is_same<std::string const &, _InputArray>::value ||
+        inline typename std::enable_if<std::is_same<std::basic_string<char>, _InputArray>::value ||
                                        std::is_same<char const *, _InputArray>::value, _Container>::type
         split(const _InputArray& sequence, char separator) {
             _Container list;
@@ -88,7 +88,7 @@ namespace utility {
         }
 
         template<class _Container, typename _InputArray = std::string>
-        inline typename std::enable_if<std::is_same<std::string const &, _InputArray>::value ||
+        inline typename std::enable_if<std::is_same<std::basic_string<char>, _InputArray>::value ||
                                        std::is_same<char const *, _InputArray>::value, _Container>::type
         split_slash(const std::string &sequence) {
             return split<_Container, _InputArray>(sequence, '/');
@@ -108,8 +108,9 @@ namespace utility {
     namespace filesystem {
 
         template<typename T>
-        inline typename std::enable_if<std::is_same<std::string const &, T>::value ||
-                                std::is_same<char const *, T>::value, bool>::type file_exist(const T& name) {
+        inline typename std::enable_if<std::is_same<std::basic_string<char>, T>::value ||
+                                std::is_same<char const*, T>::value, bool>::type
+        file_exist(const T& name) {
             struct stat buffer;
             return (stat (&name[0], &buffer) == 0);
         }

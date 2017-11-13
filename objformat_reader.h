@@ -10,12 +10,14 @@
 class ObjFormatReader {
 
 public:
+    enum Error {
+        NoError = 0, FileNotExist, FormatNotSupported, FileEmpty, FileUnrecheable, Unknown
+    };
     ObjFormatReader() = default;
     virtual ~ObjFormatReader() = default;
-
-
-    const Obj& object() const { return obj; }
-    Obj* object() { return &obj; }
+    Error load_file(const std::string& file_path);
+    inline const Obj& object() const { return obj; }
+    inline Obj* object() { return &obj; }
 private:
     Obj obj;
 

@@ -1,8 +1,8 @@
 #include <iostream>
-#include "structs.h"
-#include "utility.h"
+#include "objformat_reader.h"
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
+    ObjFormatReader reader;
     return 0;
 }
