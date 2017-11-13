@@ -75,11 +75,12 @@ ObjFormatReader::Error ObjFormatReader::load_file(const std::string &file_path) 
                         utility::parser::to_arithmetic_array<vector<string>::const_iterator, sample, 3>(tokens.begin(),
                                                                                                  tokens.end()));
                 break;
-            case ObjCommands::Face:
+            case ObjCommands::Face: {
                 assert(elements > 3 && elements <= 5 && "Invalid face, supported triangles and squares");
-                load_vertices_from_face(tokens);
+                auto vertices = load_vertices_from_face(tokens);
+                obj.vertices.insert(std::end(obj.vertices), std::begin(vertices), std::end(vertices));
                 break;
-            default:
+            } default:
                 break;
 
         }
@@ -95,8 +96,8 @@ template<class _Container>
 vector<Vertex> ObjFormatReader::load_vertices_from_face(const _Container &face_line) {
     vector<Vertex> vertices;
     for (const auto &it : face_line) {
-        auto count = utility::parser::split_slash<std::list<std::string>>(it);
-        auto tmp = utility::parser::to_arithmetic_array<std::list<std::string>::const_iterator, Index, 3>(count.begin(), count.end());
+        auto count = utility::parser::split_slash<std::vector<std::string>, std::string>(it);
+        auto tmp = utility::parser::to_arithmetic_array<std::vector<std::string>::const_iterator, Index, 3>(count.begin(), count.end());
         const Vertex v = [&, size = count.size()]() -> Vertex {
             switch (size) {
                 case Vertex::JustPos:
