@@ -35,6 +35,8 @@ using sample = float;
 #include <list>
 #include <set>
 #include <unordered_set>
+#include <ostream>
+#include <vector>
 
 
 // Basic parameters from a obj format
@@ -89,5 +91,32 @@ using VertexVector = std::vector<Vertex>;
 using VertexList = std::list<Vertex>;
 using VertexSet = std::set<Vertex>;
 using VertexUSet = std::unordered_set<Vertex, VertexHash>;
+
+
+struct Obj {
+    enum SupportedFaces  { Triangles = 3, Sguares = 4 };
+    friend std::ostream &operator<<(std::ostream &os, const Obj &obj) {
+        os << "Number of v: " << obj.v.size() << std::endl;
+        os << "Number of vn: " << obj.vn.size() << std::endl;
+        os << "Number of vt: " << obj.vt.size() << std::endl;
+        os << "Number of vp: " << obj.vp.size() << std::endl;
+        os << "Number of vertices in faces: " << obj.vertices.size() << std::endl;
+        os << "Number of indexes to plot: " << obj.indexes.size() << std::endl;
+        os << "Number of triangles: " << obj.indexes.size() / Triangles << std::endl;
+        os << std::endl;
+        return os;
+    }
+
+    // TODO: same situation: check the best container for any case, for quick search and push_back list give better behaviout than vector, but we lost the random access.
+    std::list<Vertex>           vertices{};
+    std::list<Index>            indexes{};
+    std::vector<ObjPosition>    v{};
+    std::vector<ObjVn>          vn{};
+    std::vector<ObjVt>          vt{};
+    std::vector<ObjVp>          vp{};
+};
+
+
+
 
 #endif //OBJFORMATREADER_STRUCTS_H
