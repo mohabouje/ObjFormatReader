@@ -37,7 +37,10 @@ int main(int argc, char** argv) {
 
 
     ObjFormatReader reader;
+    std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now(), t2;
     const ObjFormatReader::Error error = reader.load_file(file_path);
+    t2 = std::chrono::high_resolution_clock::now();
+
     switch (error) {
         case ObjFormatReader::NoError:
             std::cout << "File loaded with success =)" << std::endl;
@@ -64,5 +67,7 @@ int main(int argc, char** argv) {
         std::cout << reader << std::endl;
     }
 
+    std::cout << "Processing time: " << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count()
+              << " nsecs." << std::endl;
     return error;
 }
