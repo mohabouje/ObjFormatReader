@@ -220,6 +220,33 @@ test/main.cpp.s:
 	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/main.cpp.s
 .PHONY : test/main.cpp.s
 
+test/utility_test.o: test/utility_test.cpp.o
+
+.PHONY : test/utility_test.o
+
+# target to build an object file
+test/utility_test.cpp.o:
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/utility_test.cpp.o
+.PHONY : test/utility_test.cpp.o
+
+test/utility_test.i: test/utility_test.cpp.i
+
+.PHONY : test/utility_test.i
+
+# target to preprocess a source file
+test/utility_test.cpp.i:
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/utility_test.cpp.i
+.PHONY : test/utility_test.cpp.i
+
+test/utility_test.s: test/utility_test.cpp.s
+
+.PHONY : test/utility_test.s
+
+# target to generate assembly for a file
+test/utility_test.cpp.s:
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/utility_test.cpp.s
+.PHONY : test/utility_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -239,6 +266,9 @@ help:
 	@echo "... test/main.o"
 	@echo "... test/main.i"
 	@echo "... test/main.s"
+	@echo "... test/utility_test.o"
+	@echo "... test/utility_test.i"
+	@echo "... test/utility_test.s"
 .PHONY : help
 
 
