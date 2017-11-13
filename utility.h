@@ -95,8 +95,8 @@ namespace utility {
         }
 
 
-        template <class _InputIterator>
-        inline std::string join(const  _InputIterator& first, const  _InputIterator& last, const std::string& delimiter) {
+        template <class _ForwardIterator>
+        inline std::string join(const  _ForwardIterator& first, const  _ForwardIterator& last, const std::string& delimiter) {
             std::ostringstream imploded;
             std::copy(first, last, std::ostream_iterator<std::string>(imploded, delimiter.c_str()));
             return imploded.str();
