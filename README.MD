@@ -29,7 +29,7 @@ So for a 6-vertex polygon like this one: 1//1 2//2 3//3 4//4 5//5 6//6
 Just count the number of entries for each face, and do a for loop for them, and increase the starting index for the 2nd and 3rd vertex by 1 for each extra triangle.  Generic algorithm, something like that:
 
     vector<Index> tmp;
-    for (size_t i = 0, sz = (size - Obj::Triangles + 1); i < sz; ++i) {
+    for (size_t i = 0, sz = (NumberOfVertex - 2); i < sz; ++i) {
          tmp.push_back(0);
          tmp.push_back(i + 1);
          tmp.push_back(i + 2);
