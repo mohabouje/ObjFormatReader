@@ -49,6 +49,19 @@ void BM_Join_List_String(benchmark::State &state) {
         parser::join(std::begin(tmp), std::end(tmp), " ");
 }
 
+
+template <typename Q>
+void BM_Arithmetic_String_To_Arithmetic_Array(benchmark::State &state) {
+    using SList = std::vector<std::string>;
+    const SList tmp = {"-24", "2", "90", "24", "50", "76", "-24", "2", "90", "24", "50", "76",
+                       "-24", "2", "90", "24", "50", "76", "-24", "2", "90", "24", "50", "76", "-24", "2", "90", "24", "50", "76",
+                       "-24", "2", "90", "24", "50", "76", "-24", "2", "90", "24", "50", "76", "-24", "2", "90", "24", "50", "76",
+                       "-24", "2", "90", "24", "50", "76", "-24", "2", "90", "24", "50", "76", "-24", "2", "90", "24", "50", "76"};
+
+    for (auto _ : state)
+        parser::to_arithmetic_array<SList::const_iterator, Q, 50>(std::begin(tmp), std::end(tmp));
+}
+
 BENCHMARK_TEMPLATE(BM_Split_Spaces, std::vector<std::string>);
 BENCHMARK_TEMPLATE(BM_Split_Spaces, std::list<std::string>);
 BENCHMARK_TEMPLATE(BM_Split_Slash, std::vector<std::string>);
@@ -57,3 +70,7 @@ BENCHMARK_TEMPLATE(BM_Split_Slash, std::list<std::string>);
 BENCHMARK_TEMPLATE(BM_Join_List_String, std::vector<std::string>);
 BENCHMARK_TEMPLATE(BM_Join_List_String, std::list<std::string>);
 
+BENCHMARK_TEMPLATE(BM_Arithmetic_String_To_Arithmetic_Array, float);
+BENCHMARK_TEMPLATE(BM_Arithmetic_String_To_Arithmetic_Array, double);
+BENCHMARK_TEMPLATE(BM_Arithmetic_String_To_Arithmetic_Array, int);
+BENCHMARK_TEMPLATE(BM_Arithmetic_String_To_Arithmetic_Array, long);
