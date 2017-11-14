@@ -4,8 +4,8 @@
 
 #include <fstream>
 #include <random>
-#include "../Catch2/include/catch.hpp"
-#include "../objformat_reader.h"
+#include <Catch2/include/catch.hpp>
+#include "objformat_reader.h"
 
 using namespace std;
 using namespace chrono;
@@ -73,7 +73,7 @@ SCENARIO("Loading a basic .obj file") {
     GIVEN("A v parameter that we will save in the file X times") {
         outfile.clear();
         const size_t num = 1000;
-        const ObjPosition v = { distribution(generator), distribution(generator), distribution(generator), distribution(generator)};
+        const ObjPosition v = {{ distribution(generator), distribution(generator), distribution(generator), distribution(generator) }};
         for (size_t i = 0; i < num; ++i) {
             outfile << "v " << v[0] <<  " " << v[1] << " " << v[2]  << " " << v[3] << endl;
         }
@@ -102,7 +102,7 @@ SCENARIO("Loading a basic .obj file") {
     GIVEN("A vn parameter that we will save in the file X times") {
         outfile.clear();
         const size_t num = 1000;
-        const ObjVn vn = { distribution(generator), distribution(generator), distribution(generator) };
+        const ObjVn vn = {{ distribution(generator), distribution(generator), distribution(generator) }};
         for (size_t i = 0; i < num; ++i) {
             outfile << "vn " << vn[0] <<  " " << vn[1] << " " << vn[2]   << endl;
         }
@@ -132,7 +132,7 @@ SCENARIO("Loading a basic .obj file") {
     GIVEN("A vt parameter that we will save in the file X times") {
         outfile.clear();
         const size_t num = 1000;
-        const ObjVn vt = { distribution(generator), distribution(generator), distribution(generator) };
+        const ObjVn vt = {{ distribution(generator), distribution(generator), distribution(generator) }};
         for (size_t i = 0; i < num; ++i) {
             outfile << "vt " << vt[0] <<  " " << vt[1] << " " << vt[2]   << endl;
         }
@@ -161,7 +161,7 @@ SCENARIO("Loading a basic .obj file") {
     GIVEN("A vp parameter that we will save in the file X times") {
         outfile.clear();
         const size_t num = 1000;
-        const ObjVn vp = { distribution(generator), distribution(generator), distribution(generator) };
+        const ObjVn vp = {{ distribution(generator), distribution(generator), distribution(generator) }};
         for (size_t i = 0; i < num; ++i) {
             outfile << "vp " << vp[0] <<  " " << vp[1] << " " << vp[2]   << endl;
         }
@@ -188,10 +188,10 @@ SCENARIO("Loading a basic .obj file") {
 
     GIVEN("A generic file .obj") {
         outfile.clear();
-        const ObjPosition v = { distribution(generator), distribution(generator), distribution(generator), distribution(generator)};
-        const ObjVn vn = { distribution(generator), distribution(generator), distribution(generator) };
-        const ObjVn vp = { distribution(generator), distribution(generator), distribution(generator) };
-        const ObjVn vt = { distribution(generator), distribution(generator), distribution(generator) };
+        const ObjPosition v = {{ distribution(generator), distribution(generator), distribution(generator), distribution(generator) }};
+        const ObjVn vn = {{ distribution(generator), distribution(generator), distribution(generator) }};
+        const ObjVn vp = {{ distribution(generator), distribution(generator), distribution(generator) }};
+        const ObjVn vt = {{ distribution(generator), distribution(generator), distribution(generator) }};
 
         const size_t nV = 65, nVn = 56, nVp = 87, nVt = 78;
         for (size_t i = 0; i < nV; ++i) {

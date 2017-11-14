@@ -45,7 +45,8 @@ ObjFormatReader::Error ObjFormatReader::load_file(const std::string &file_path) 
         auto elements = tokens.size();
         if (!elements) continue;
 
-        const string command = tokens.front(); tokens.erase(tokens.begin());
+        const string command = tokens.front();
+        tokens.erase(tokens.begin());
         switch (Command[command]) {
             case ObjCommands::Definition:
                 break;

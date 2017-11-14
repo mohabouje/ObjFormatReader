@@ -137,71 +137,44 @@ runtest/fast:
 .PHONY : runtest/fast
 
 #=============================================================================
-# Target rules for targets named ObjFormatReader
+# Target rules for targets named objformatreader
 
 # Build rule for target.
-ObjFormatReader: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ObjFormatReader
-.PHONY : ObjFormatReader
+objformatreader: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 objformatreader
+.PHONY : objformatreader
 
 # fast build rule for target.
-ObjFormatReader/fast:
-	$(MAKE) -f CMakeFiles/ObjFormatReader.dir/build.make CMakeFiles/ObjFormatReader.dir/build
-.PHONY : ObjFormatReader/fast
+objformatreader/fast:
+	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/build
+.PHONY : objformatreader/fast
 
-benchmarks/objformat_benchmark.o: benchmarks/objformat_benchmark.cpp.o
+benchmarks/do_benchmarks.o: benchmarks/do_benchmarks.cpp.o
 
-.PHONY : benchmarks/objformat_benchmark.o
-
-# target to build an object file
-benchmarks/objformat_benchmark.cpp.o:
-	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/objformat_benchmark.cpp.o
-.PHONY : benchmarks/objformat_benchmark.cpp.o
-
-benchmarks/objformat_benchmark.i: benchmarks/objformat_benchmark.cpp.i
-
-.PHONY : benchmarks/objformat_benchmark.i
-
-# target to preprocess a source file
-benchmarks/objformat_benchmark.cpp.i:
-	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/objformat_benchmark.cpp.i
-.PHONY : benchmarks/objformat_benchmark.cpp.i
-
-benchmarks/objformat_benchmark.s: benchmarks/objformat_benchmark.cpp.s
-
-.PHONY : benchmarks/objformat_benchmark.s
-
-# target to generate assembly for a file
-benchmarks/objformat_benchmark.cpp.s:
-	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/objformat_benchmark.cpp.s
-.PHONY : benchmarks/objformat_benchmark.cpp.s
-
-benchmarks/utility_benchmarks.o: benchmarks/utility_benchmarks.cpp.o
-
-.PHONY : benchmarks/utility_benchmarks.o
+.PHONY : benchmarks/do_benchmarks.o
 
 # target to build an object file
-benchmarks/utility_benchmarks.cpp.o:
-	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/utility_benchmarks.cpp.o
-.PHONY : benchmarks/utility_benchmarks.cpp.o
+benchmarks/do_benchmarks.cpp.o:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/do_benchmarks.cpp.o
+.PHONY : benchmarks/do_benchmarks.cpp.o
 
-benchmarks/utility_benchmarks.i: benchmarks/utility_benchmarks.cpp.i
+benchmarks/do_benchmarks.i: benchmarks/do_benchmarks.cpp.i
 
-.PHONY : benchmarks/utility_benchmarks.i
+.PHONY : benchmarks/do_benchmarks.i
 
 # target to preprocess a source file
-benchmarks/utility_benchmarks.cpp.i:
-	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/utility_benchmarks.cpp.i
-.PHONY : benchmarks/utility_benchmarks.cpp.i
+benchmarks/do_benchmarks.cpp.i:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/do_benchmarks.cpp.i
+.PHONY : benchmarks/do_benchmarks.cpp.i
 
-benchmarks/utility_benchmarks.s: benchmarks/utility_benchmarks.cpp.s
+benchmarks/do_benchmarks.s: benchmarks/do_benchmarks.cpp.s
 
-.PHONY : benchmarks/utility_benchmarks.s
+.PHONY : benchmarks/do_benchmarks.s
 
 # target to generate assembly for a file
-benchmarks/utility_benchmarks.cpp.s:
-	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/utility_benchmarks.cpp.s
-.PHONY : benchmarks/utility_benchmarks.cpp.s
+benchmarks/do_benchmarks.cpp.s:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/do_benchmarks.cpp.s
+.PHONY : benchmarks/do_benchmarks.cpp.s
 
 main.o: main.cpp.o
 
@@ -209,7 +182,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/ObjFormatReader.dir/build.make CMakeFiles/ObjFormatReader.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -218,7 +191,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/ObjFormatReader.dir/build.make CMakeFiles/ObjFormatReader.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -227,7 +200,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/ObjFormatReader.dir/build.make CMakeFiles/ObjFormatReader.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 objformat_reader.o: objformat_reader.cpp.o
@@ -238,7 +211,7 @@ objformat_reader.o: objformat_reader.cpp.o
 objformat_reader.cpp.o:
 	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/objformat_reader.cpp.o
 	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/objformat_reader.cpp.o
-	$(MAKE) -f CMakeFiles/ObjFormatReader.dir/build.make CMakeFiles/ObjFormatReader.dir/objformat_reader.cpp.o
+	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/objformat_reader.cpp.o
 .PHONY : objformat_reader.cpp.o
 
 objformat_reader.i: objformat_reader.cpp.i
@@ -249,7 +222,7 @@ objformat_reader.i: objformat_reader.cpp.i
 objformat_reader.cpp.i:
 	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/objformat_reader.cpp.i
 	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/objformat_reader.cpp.i
-	$(MAKE) -f CMakeFiles/ObjFormatReader.dir/build.make CMakeFiles/ObjFormatReader.dir/objformat_reader.cpp.i
+	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/objformat_reader.cpp.i
 .PHONY : objformat_reader.cpp.i
 
 objformat_reader.s: objformat_reader.cpp.s
@@ -260,7 +233,7 @@ objformat_reader.s: objformat_reader.cpp.s
 objformat_reader.cpp.s:
 	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/objformat_reader.cpp.s
 	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/objformat_reader.cpp.s
-	$(MAKE) -f CMakeFiles/ObjFormatReader.dir/build.make CMakeFiles/ObjFormatReader.dir/objformat_reader.cpp.s
+	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/objformat_reader.cpp.s
 .PHONY : objformat_reader.cpp.s
 
 test/objformat_test.o: test/objformat_test.cpp.o
@@ -327,13 +300,10 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... runtest"
-	@echo "... ObjFormatReader"
-	@echo "... benchmarks/objformat_benchmark.o"
-	@echo "... benchmarks/objformat_benchmark.i"
-	@echo "... benchmarks/objformat_benchmark.s"
-	@echo "... benchmarks/utility_benchmarks.o"
-	@echo "... benchmarks/utility_benchmarks.i"
-	@echo "... benchmarks/utility_benchmarks.s"
+	@echo "... objformatreader"
+	@echo "... benchmarks/do_benchmarks.o"
+	@echo "... benchmarks/do_benchmarks.i"
+	@echo "... benchmarks/do_benchmarks.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

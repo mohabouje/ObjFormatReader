@@ -3,15 +3,13 @@
 //
 
 #include <benchmark/benchmark.h>
-#include "../utility.h"
+#include "utility.h"
+#include "objformat_reader.h"
 
-#include <vector>
 #include <list>
 #include <queue>
 
 using namespace utility;
-
-
 template <typename Container>
 static void BM_Split_Spaces(benchmark::State &state) {
     const std::string tmp = "Never gonna give you up\n"
@@ -23,7 +21,6 @@ static void BM_Split_Spaces(benchmark::State &state) {
     for (auto _ : state)
         parser::split_space<Container, std::string>(tmp);
 }
-
 
 template <typename Container>
 static void BM_Split_Slash(benchmark::State &state) {
@@ -87,21 +84,26 @@ void BM_Arithmetic_String_To_Arithmetic_Array(benchmark::State &state) {
         parser::to_arithmetic_array<SList::const_iterator, Q, 50>(std::begin(tmp), std::end(tmp));
 }
 
+static void BM_Load_Obj(benchmark::State &state) {
+    const std::string tmp = "/Users/mohabouje/Downloads/test_2.obj";
+    ObjFormatReader reader;
+    for (auto _ : state)
+        reader.load_file(tmp);
+}
+
+BENCHMARK(BM_Load_Obj);
 BENCHMARK_TEMPLATE(BM_Split_Spaces, std::vector<std::string>);
 BENCHMARK_TEMPLATE(BM_Split_Spaces, std::list<std::string>);
 BENCHMARK_TEMPLATE(BM_Split_Slash, std::vector<std::string>);
 BENCHMARK_TEMPLATE(BM_Split_Slash, std::list<std::string>);
-
 BENCHMARK_TEMPLATE(BM_Regex_Split_Slash, std::vector<std::string>);
 BENCHMARK_TEMPLATE(BM_Regex_Split_Slash, std::list<std::string>);
 BENCHMARK_TEMPLATE(BM_Regex_Split_Spaces, std::vector<std::string>);
 BENCHMARK_TEMPLATE(BM_Regex_Split_Spaces, std::list<std::string>);
-
-
 BENCHMARK_TEMPLATE(BM_Join_List_String, std::vector<std::string>);
 BENCHMARK_TEMPLATE(BM_Join_List_String, std::list<std::string>);
-
 BENCHMARK_TEMPLATE(BM_Arithmetic_String_To_Arithmetic_Array, float);
 BENCHMARK_TEMPLATE(BM_Arithmetic_String_To_Arithmetic_Array, double);
 BENCHMARK_TEMPLATE(BM_Arithmetic_String_To_Arithmetic_Array, int);
 BENCHMARK_TEMPLATE(BM_Arithmetic_String_To_Arithmetic_Array, long);
+BENCHMARK_MAIN();
