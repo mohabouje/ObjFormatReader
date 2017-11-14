@@ -13,6 +13,7 @@ class value;
 #include <type_traits>
 #include <sys/stat.h>
 #include <sstream>
+#include <regex>
 
 namespace utility {
     namespace algorithm {
@@ -61,6 +62,28 @@ namespace utility {
     }
 
     namespace parser {
+
+        template<class _Container, typename _InputArray = std::string>
+        inline typename std::enable_if<std::is_same<std::basic_string<char>, _InputArray>::value ||
+                                       std::is_same<char const *, _InputArray>::value, _Container>::type
+        regex_split_form_1(const std::string &sequence, const std::string &reg_exp) {
+            _Container list;
+            std::regex re(reg_exp);
+            std::sregex_token_iterator begin(std::begin(sequence), std::end(sequence), re, -1), end;
+            std::copy(begin, end, std::back_inserter(list));
+            return list;
+        }
+
+        template<class _Container, typename _InputArray = std::string>
+        inline typename std::enable_if<std::is_same<std::basic_string<char>, _InputArray>::value ||
+                                       std::is_same<char const *, _InputArray>::value, _Container>::type
+        regex_split_form_2(const std::string &sequence, const std::string &reg_exp) {
+            std::regex re(reg_exp);
+            std::sregex_token_iterator begin(std::begin(sequence), std::end(sequence), re, -1), end;
+            return _Container({begin, end});
+        }
+
+
         template<class _Container, typename _InputArray = std::string>
         inline typename std::enable_if<std::is_same<std::basic_string<char>, _InputArray>::value ||
                                        std::is_same<char const *, _InputArray>::value, _Container>::type

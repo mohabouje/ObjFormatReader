@@ -58,7 +58,7 @@ using Index = size_t;
 struct Vertex {
     enum VertexType { JustPos = 1, PosAndTCoord, PosTCoordAndNormal};
     constexpr Vertex()  = default;
-    constexpr Vertex(const ObjPosition &v) : v(v) {}
+    explicit constexpr Vertex(const ObjPosition &v) : v(v) {}
     constexpr Vertex(const ObjPosition &v, const ObjVn &vn) : v(v), vn(vn) {}
     constexpr Vertex(const ObjPosition &v, const ObjVn &vn, const ObjVt &vt) : v(v), vn(vn), vt(vt) {}
 
@@ -126,8 +126,8 @@ struct Obj {
 
 
     // TODO: same situation: check the best container for any case, for quick search and push_back list give better behaviout than vector, but we lost the random access.
-    std::list<Vertex>           vertices{};
-    std::list<Index>            indexes{};
+    std::vector<Vertex>           vertices{};
+    std::vector<Index>            indexes{};
     std::vector<ObjPosition>    v{};
     std::vector<ObjVn>          vn{};
     std::vector<ObjVt>          vt{};

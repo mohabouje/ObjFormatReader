@@ -96,8 +96,8 @@ typename std::enable_if<std::is_same<std::basic_string<char>, T>::value, std::ve
 ObjFormatReader::load_vertices_from_face(const Container<T> &face_line) {
     vector<Vertex> vertices;
     for (const auto &it : face_line) {
-        auto count = utility::parser::split_slash<std::vector<std::string>, std::string>(it);
-        auto tmp = utility::parser::to_arithmetic_array<std::vector<std::string>::const_iterator, Index, 3>(count.begin(), count.end());
+        auto count = utility::parser::split_slash<list<string>>(it);
+        auto tmp = utility::parser::to_arithmetic_array<list<std::string>::const_iterator, Index, 3>(count.begin(), count.end());
         const Vertex v = [&, size = count.size()]() -> Vertex {
             switch (size) {
                 case Vertex::JustPos:
@@ -118,6 +118,7 @@ ObjFormatReader::load_vertices_from_face(const Container<T> &face_line) {
 }
 
 
+// See readme in git for details about this easy algorithm.
 template <typename T, template <typename, typename = allocator<T>> class Container>
 typename std::enable_if<std::is_same<Vertex, T>::value, void>::type
 ObjFormatReader::vertices_triangle_fan(const Container<T> &vertices) {
