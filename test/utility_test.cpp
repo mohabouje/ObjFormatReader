@@ -2,7 +2,7 @@
 // Created by Mohammed Boujemaoui on 13/11/2017.
 //
 
-#include "../Catch2/include/catch.hpp"
+#include "../Catch2/include/catch_with_main.hpp"
 #include "../utility.h"
 #include <fstream>
 #include <cstdio>
@@ -35,7 +35,7 @@ SCENARIO("Testing filesystem functionalities") {
             }
             AND_WHEN("We create the file manually") {
                 std::ofstream(my_file).put('a');
-                THEN("The file shoyld exist but should be empty") {
+                THEN("The file should exist but should be empty") {
                     REQUIRE(utility::filesystem::file_exist(my_file));
                 }
                 AND_THEN("The format should be .thing") {
@@ -48,4 +48,69 @@ SCENARIO("Testing filesystem functionalities") {
 
 
     }
+}
+
+
+SCENARIO("Split & join of strings") {
+    GIVEN("A spaces separated string") {
+        const std::string tmp = "Hello!";
+        const std::size_t size = 1000;
+        const char separator = ' ';
+        std::string buffer{};
+        for (size_t i = 0; i < size; i++) {
+            buffer += tmp;
+            buffer += separator;
+        }
+
+        WHEN("We want to split the string by commas") {
+            auto container = utility::parser::split_space<std::vector<std::string>>(buffer);
+            THEN("The container should have the correct size") {
+                REQUIRE(!container.empty());
+                REQUIRE(container.size() == size);
+            }
+            THEN("Every single value should be tmp") {
+                for (auto& str : container) {
+                    REQUIRE(str == tmp);
+                }
+            }
+            AND_THEN("When we join the strings by the same separator") {
+                auto str = utility::parser::join(std::begin(container), std::end(container), " ");
+                THEN("The string should be the same") {
+                    REQUIRE(str == buffer);
+                }
+            }
+        }
+    }
+
+
+    GIVEN("A slash separated string") {
+        const std::string tmp = "Hello!";
+        const std::size_t size = 1000;
+        const char separator = '/';
+        std::string buffer{};
+        for (size_t i = 0; i < size; i++) {
+            buffer += tmp;
+            buffer += separator;
+        }
+
+        WHEN("We want to split the string by commas") {
+            auto container = utility::parser::split<std::vector<std::string>>(buffer, separator);
+            THEN("The container should have the correct size") {
+                REQUIRE(!container.empty());
+                REQUIRE(container.size() == size);
+            }
+            THEN("Every single value should be tmp") {
+                for (auto& str : container) {
+                    REQUIRE(str == tmp);
+                }
+            }
+            AND_THEN("When we join the strings by the same separator") {
+                auto str = utility::parser::join(std::begin(container), std::end(container), "/");
+                THEN("The string should be the same") {
+                    REQUIRE(str == buffer);
+                }
+            }
+        }
+    }
+
 }
