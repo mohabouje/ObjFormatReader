@@ -54,6 +54,13 @@ SCENARIO("Testing object format parser") {
 
 }
 
+
+#define COMPARE_ARRAYS_WITH_ELEMENT(X, Y)           \
+    for(const auto& elem : X)                       \
+        for (size_t i = 0; i < elem.size(); ++i)    \
+            REQUIRE(elem[i] == Approx(Y[i]));
+
+
 SCENARIO("Loading a basic .obj file") {
     const string my_obj = "test.obj";
     ofstream outfile(my_obj);
@@ -77,9 +84,7 @@ SCENARIO("Loading a basic .obj file") {
             } AND_THEN("The number of v loaded should be the same") {
                 REQUIRE(reader.object()->v.size() == num);
             } AND_THEN("The values of every single v should be the same") {
-                for (size_t i = 0; i < num; ++i) {
-                    REQUIRE(reader.object()->v[i] == v);
-                }
+                COMPARE_ARRAYS_WITH_ELEMENT(reader.object()->v, v);
             }
 
         }
