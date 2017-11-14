@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named runbenchmark
+
+# Build rule for target.
+runbenchmark: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 runbenchmark
+.PHONY : runbenchmark
+
+# fast build rule for target.
+runbenchmark/fast:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/build
+.PHONY : runbenchmark/fast
+
+#=============================================================================
 # Target rules for targets named runtest
 
 # Build rule for target.
@@ -169,6 +182,7 @@ objformat_reader.o: objformat_reader.cpp.o
 
 # target to build an object file
 objformat_reader.cpp.o:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/objformat_reader.cpp.o
 	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/objformat_reader.cpp.o
 	$(MAKE) -f CMakeFiles/ObjFormatReader.dir/build.make CMakeFiles/ObjFormatReader.dir/objformat_reader.cpp.o
 .PHONY : objformat_reader.cpp.o
@@ -179,6 +193,7 @@ objformat_reader.i: objformat_reader.cpp.i
 
 # target to preprocess a source file
 objformat_reader.cpp.i:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/objformat_reader.cpp.i
 	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/objformat_reader.cpp.i
 	$(MAKE) -f CMakeFiles/ObjFormatReader.dir/build.make CMakeFiles/ObjFormatReader.dir/objformat_reader.cpp.i
 .PHONY : objformat_reader.cpp.i
@@ -189,36 +204,10 @@ objformat_reader.s: objformat_reader.cpp.s
 
 # target to generate assembly for a file
 objformat_reader.cpp.s:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/objformat_reader.cpp.s
 	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/objformat_reader.cpp.s
 	$(MAKE) -f CMakeFiles/ObjFormatReader.dir/build.make CMakeFiles/ObjFormatReader.dir/objformat_reader.cpp.s
 .PHONY : objformat_reader.cpp.s
-
-test/main.o: test/main.cpp.o
-
-.PHONY : test/main.o
-
-# target to build an object file
-test/main.cpp.o:
-	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/main.cpp.o
-.PHONY : test/main.cpp.o
-
-test/main.i: test/main.cpp.i
-
-.PHONY : test/main.i
-
-# target to preprocess a source file
-test/main.cpp.i:
-	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/main.cpp.i
-.PHONY : test/main.cpp.i
-
-test/main.s: test/main.cpp.s
-
-.PHONY : test/main.s
-
-# target to generate assembly for a file
-test/main.cpp.s:
-	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/main.cpp.s
-.PHONY : test/main.cpp.s
 
 test/utility_test.o: test/utility_test.cpp.o
 
@@ -253,6 +242,7 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... runbenchmark"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... runtest"
@@ -263,9 +253,6 @@ help:
 	@echo "... objformat_reader.o"
 	@echo "... objformat_reader.i"
 	@echo "... objformat_reader.s"
-	@echo "... test/main.o"
-	@echo "... test/main.i"
-	@echo "... test/main.s"
 	@echo "... test/utility_test.o"
 	@echo "... test/utility_test.i"
 	@echo "... test/utility_test.s"
