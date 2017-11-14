@@ -2,7 +2,7 @@
 // Created by Mohammed Boujemaoui on 14/11/2017.
 //
 
-#include <benchmark/benchmark.h>
+#include <benchmark/include/benchmark/benchmark.h>
 #include "utility.h"
 #include "objformat_reader.h"
 

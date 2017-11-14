@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 #include "objformat_reader.h"
 
 void print_help() {

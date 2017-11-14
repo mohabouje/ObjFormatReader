@@ -15,7 +15,6 @@ add_executable(objformatreader main.cpp ${SOURCE_FILES})
 add_executable(runtest ${SOURCE_FILES} ${TEST_FILES})
 include_directories("${BASEPATH}/Catch2/include/")
 
-
 find_library(BENCHMARK_LIB NAMES lbenchmark)
 IF (BENCHMARK_LIB)
     message("GOOGLE BENCHMARK library found, build ")
