@@ -34,7 +34,8 @@ SCENARIO("Testing filesystem functionalities") {
                 REQUIRE(!state);
             }
             AND_WHEN("We create the file manually") {
-                std::ofstream(my_file).put('a');
+                std::ofstream a(my_file);
+                a << ('a');
                 THEN("The file should exist but should be empty") {
                     REQUIRE(utility::filesystem::file_exist(my_file));
                 }
@@ -42,6 +43,7 @@ SCENARIO("Testing filesystem functionalities") {
                     REQUIRE(utility::filesystem::file_format(my_file) == ".thing");
                     REQUIRE(utility::filesystem::is_format_supported(my_file, ".thing"));
                 }
+                a.close();
                 remove(my_file);
             }
         }

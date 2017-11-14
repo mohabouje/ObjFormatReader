@@ -40,6 +40,7 @@ SCENARIO("Testing object format parser") {
         WHEN( "The file is empty and & .obj format" ) {
             remove(my_obj.c_str());
             ofstream outfile (my_obj.c_str());
+            outfile << "g test";
             AND_WHEN("We try to parse the archive that is an .obj format") {
                 auto error = reader.load_file(my_obj);
                 THEN("The error should be: File empty"){
@@ -69,13 +70,13 @@ SCENARIO("Loading a basic .obj file") {
     uniform_real_distribution<ObjPosition::value_type > distribution(0.0, 1.0);
 
 
-    GIVEN("A vertex obj that we will save in the file X times") {
+    GIVEN("A v parameter that we will save in the file X times") {
+        outfile.clear();
         const size_t num = 1000;
         const ObjPosition v = { distribution(generator), distribution(generator), distribution(generator), distribution(generator)};
         for (size_t i = 0; i < num; ++i) {
             outfile << "v " << v[0] <<  " " << v[1] << " " << v[2]  << " " << v[3] << endl;
         }
-
         WHEN("We read the file from the parser") {
             ObjFormatReader reader;
             auto error = reader.load_file(my_obj);
@@ -85,16 +86,103 @@ SCENARIO("Loading a basic .obj file") {
                 REQUIRE(reader.object()->v.size() == num);
             } AND_THEN("The values of every single v should be the same") {
                 COMPARE_ARRAYS_WITH_ELEMENT(reader.object()->v, v);
+            } AND_THEN("The rest of the fields should be empty") {
+                Obj* o = reader.object();
+                REQUIRE((o->vn.empty()
+                         && o->vt.empty()
+                         && o->vp.empty()
+                         && o->indexes.empty()
+                         && o->vertices.empty()));
             }
 
         }
+        remove(my_obj.c_str());
+    }
 
+    GIVEN("A vn parameter that we will save in the file X times") {
+        outfile.clear();
+        const size_t num = 1000;
+        const ObjVn vn = { distribution(generator), distribution(generator), distribution(generator) };
+        for (size_t i = 0; i < num; ++i) {
+            outfile << "vn " << vn[0] <<  " " << vn[1] << " " << vn[2]   << endl;
+        }
+        WHEN("We read the file from the parser") {
+            ObjFormatReader reader;
+            auto error = reader.load_file(my_obj);
+            THEN("No error is the return statement") {
+                REQUIRE(error == ObjFormatReader::NoError);
+            } AND_THEN("The number of v loaded should be the same") {
+                REQUIRE(reader.object()->vn.size() == num);
+            } AND_THEN("The values of every single v should be the same") {
+                COMPARE_ARRAYS_WITH_ELEMENT(reader.object()->vn, vn);
+            } AND_THEN("The rest of the fields should be empty") {
+                Obj* o = reader.object();
+                REQUIRE((o->v.empty()
+                         && o->vt.empty()
+                         && o->vp.empty()
+                         && o->indexes.empty()
+                         && o->vertices.empty()));
+            }
 
-
-
+        }
     }
 
 
 
+    GIVEN("A vt parameter that we will save in the file X times") {
+        outfile.clear();
+        const size_t num = 1000;
+        const ObjVn vt = { distribution(generator), distribution(generator), distribution(generator) };
+        for (size_t i = 0; i < num; ++i) {
+            outfile << "vt " << vt[0] <<  " " << vt[1] << " " << vt[2]   << endl;
+        }
+        WHEN("We read the file from the parser") {
+            ObjFormatReader reader;
+            auto error = reader.load_file(my_obj);
+            THEN("No error is the return statement") {
+                REQUIRE(error == ObjFormatReader::NoError);
+            } AND_THEN("The number of v loaded should be the same") {
+                REQUIRE(reader.object()->vt.size() == num);
+            } AND_THEN("The values of every single v should be the same") {
+                COMPARE_ARRAYS_WITH_ELEMENT(reader.object()->vt, vt);
+            } AND_THEN("The rest of the fields should be empty") {
+                Obj* o = reader.object();
+                REQUIRE((o->v.empty()
+                         && o->vn.empty()
+                         && o->vp.empty()
+                         && o->indexes.empty()
+                         && o->vertices.empty()));
+            }
 
+        }
+    }
+
+
+    GIVEN("A vp parameter that we will save in the file X times") {
+        outfile.clear();
+        const size_t num = 1000;
+        const ObjVn vp = { distribution(generator), distribution(generator), distribution(generator) };
+        for (size_t i = 0; i < num; ++i) {
+            outfile << "vp " << vp[0] <<  " " << vp[1] << " " << vp[2]   << endl;
+        }
+        WHEN("We read the file from the parser") {
+            ObjFormatReader reader;
+            auto error = reader.load_file(my_obj);
+            THEN("No error is the return statement") {
+                REQUIRE(error == ObjFormatReader::NoError);
+            } AND_THEN("The number of v loaded should be the same") {
+                REQUIRE(reader.object()->vp.size() == num);
+            } AND_THEN("The values of every single v should be the same") {
+                COMPARE_ARRAYS_WITH_ELEMENT(reader.object()->vp, vp);
+            } AND_THEN("The rest of the fields should be empty") {
+                Obj* o = reader.object();
+                REQUIRE((o->v.empty()
+                         && o->vn.empty()
+                         && o->vt.empty()
+                         && o->indexes.empty()
+                         && o->vertices.empty()));
+            }
+
+        }
+    }
 }
