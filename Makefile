@@ -149,146 +149,86 @@ objformatreader/fast:
 	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/build
 .PHONY : objformatreader/fast
 
-benchmarks/do_benchmarks.o: benchmarks/do_benchmarks.cpp.o
-
+# target to build an object file
+benchmarks/do_benchmarks.o:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/do_benchmarks.o
 .PHONY : benchmarks/do_benchmarks.o
 
-# target to build an object file
-benchmarks/do_benchmarks.cpp.o:
-	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/do_benchmarks.cpp.o
-.PHONY : benchmarks/do_benchmarks.cpp.o
-
-benchmarks/do_benchmarks.i: benchmarks/do_benchmarks.cpp.i
-
+# target to preprocess a source file
+benchmarks/do_benchmarks.i:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/do_benchmarks.i
 .PHONY : benchmarks/do_benchmarks.i
 
-# target to preprocess a source file
-benchmarks/do_benchmarks.cpp.i:
-	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/do_benchmarks.cpp.i
-.PHONY : benchmarks/do_benchmarks.cpp.i
-
-benchmarks/do_benchmarks.s: benchmarks/do_benchmarks.cpp.s
-
+# target to generate assembly for a file
+benchmarks/do_benchmarks.s:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/do_benchmarks.s
 .PHONY : benchmarks/do_benchmarks.s
 
-# target to generate assembly for a file
-benchmarks/do_benchmarks.cpp.s:
-	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/do_benchmarks.cpp.s
-.PHONY : benchmarks/do_benchmarks.cpp.s
-
-main.o: main.cpp.o
-
+# target to build an object file
+main.o:
+	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/main.o
 .PHONY : main.o
 
-# target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-
+# target to preprocess a source file
+main.i:
+	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/main.i
 .PHONY : main.i
 
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-
+# target to generate assembly for a file
+main.s:
+	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/main.s
 .PHONY : main.s
 
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/main.cpp.s
-.PHONY : main.cpp.s
-
-objformat_reader.o: objformat_reader.cpp.o
-
+# target to build an object file
+objformat_reader.o:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/objformat_reader.o
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/objformat_reader.o
+	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/objformat_reader.o
 .PHONY : objformat_reader.o
 
-# target to build an object file
-objformat_reader.cpp.o:
-	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/objformat_reader.cpp.o
-	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/objformat_reader.cpp.o
-	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/objformat_reader.cpp.o
-.PHONY : objformat_reader.cpp.o
-
-objformat_reader.i: objformat_reader.cpp.i
-
+# target to preprocess a source file
+objformat_reader.i:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/objformat_reader.i
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/objformat_reader.i
+	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/objformat_reader.i
 .PHONY : objformat_reader.i
 
-# target to preprocess a source file
-objformat_reader.cpp.i:
-	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/objformat_reader.cpp.i
-	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/objformat_reader.cpp.i
-	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/objformat_reader.cpp.i
-.PHONY : objformat_reader.cpp.i
-
-objformat_reader.s: objformat_reader.cpp.s
-
+# target to generate assembly for a file
+objformat_reader.s:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/objformat_reader.s
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/objformat_reader.s
+	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/objformat_reader.s
 .PHONY : objformat_reader.s
 
-# target to generate assembly for a file
-objformat_reader.cpp.s:
-	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/objformat_reader.cpp.s
-	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/objformat_reader.cpp.s
-	$(MAKE) -f CMakeFiles/objformatreader.dir/build.make CMakeFiles/objformatreader.dir/objformat_reader.cpp.s
-.PHONY : objformat_reader.cpp.s
-
-test/objformat_test.o: test/objformat_test.cpp.o
-
+# target to build an object file
+test/objformat_test.o:
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/objformat_test.o
 .PHONY : test/objformat_test.o
 
-# target to build an object file
-test/objformat_test.cpp.o:
-	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/objformat_test.cpp.o
-.PHONY : test/objformat_test.cpp.o
-
-test/objformat_test.i: test/objformat_test.cpp.i
-
+# target to preprocess a source file
+test/objformat_test.i:
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/objformat_test.i
 .PHONY : test/objformat_test.i
 
-# target to preprocess a source file
-test/objformat_test.cpp.i:
-	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/objformat_test.cpp.i
-.PHONY : test/objformat_test.cpp.i
-
-test/objformat_test.s: test/objformat_test.cpp.s
-
+# target to generate assembly for a file
+test/objformat_test.s:
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/objformat_test.s
 .PHONY : test/objformat_test.s
 
-# target to generate assembly for a file
-test/objformat_test.cpp.s:
-	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/objformat_test.cpp.s
-.PHONY : test/objformat_test.cpp.s
-
-test/utility_test.o: test/utility_test.cpp.o
-
+# target to build an object file
+test/utility_test.o:
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/utility_test.o
 .PHONY : test/utility_test.o
 
-# target to build an object file
-test/utility_test.cpp.o:
-	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/utility_test.cpp.o
-.PHONY : test/utility_test.cpp.o
-
-test/utility_test.i: test/utility_test.cpp.i
-
+# target to preprocess a source file
+test/utility_test.i:
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/utility_test.i
 .PHONY : test/utility_test.i
 
-# target to preprocess a source file
-test/utility_test.cpp.i:
-	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/utility_test.cpp.i
-.PHONY : test/utility_test.cpp.i
-
-test/utility_test.s: test/utility_test.cpp.s
-
-.PHONY : test/utility_test.s
-
 # target to generate assembly for a file
-test/utility_test.cpp.s:
-	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/utility_test.cpp.s
-.PHONY : test/utility_test.cpp.s
+test/utility_test.s:
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/utility_test.s
+.PHONY : test/utility_test.s
 
 # Help Target
 help:
