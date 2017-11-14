@@ -149,6 +149,33 @@ ObjFormatReader/fast:
 	$(MAKE) -f CMakeFiles/ObjFormatReader.dir/build.make CMakeFiles/ObjFormatReader.dir/build
 .PHONY : ObjFormatReader/fast
 
+benchmarks/objformat_benchmark.o: benchmarks/objformat_benchmark.cpp.o
+
+.PHONY : benchmarks/objformat_benchmark.o
+
+# target to build an object file
+benchmarks/objformat_benchmark.cpp.o:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/objformat_benchmark.cpp.o
+.PHONY : benchmarks/objformat_benchmark.cpp.o
+
+benchmarks/objformat_benchmark.i: benchmarks/objformat_benchmark.cpp.i
+
+.PHONY : benchmarks/objformat_benchmark.i
+
+# target to preprocess a source file
+benchmarks/objformat_benchmark.cpp.i:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/objformat_benchmark.cpp.i
+.PHONY : benchmarks/objformat_benchmark.cpp.i
+
+benchmarks/objformat_benchmark.s: benchmarks/objformat_benchmark.cpp.s
+
+.PHONY : benchmarks/objformat_benchmark.s
+
+# target to generate assembly for a file
+benchmarks/objformat_benchmark.cpp.s:
+	$(MAKE) -f CMakeFiles/runbenchmark.dir/build.make CMakeFiles/runbenchmark.dir/benchmarks/objformat_benchmark.cpp.s
+.PHONY : benchmarks/objformat_benchmark.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -247,6 +274,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... runtest"
 	@echo "... ObjFormatReader"
+	@echo "... benchmarks/objformat_benchmark.o"
+	@echo "... benchmarks/objformat_benchmark.i"
+	@echo "... benchmarks/objformat_benchmark.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
