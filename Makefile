@@ -263,6 +263,33 @@ objformat_reader.cpp.s:
 	$(MAKE) -f CMakeFiles/ObjFormatReader.dir/build.make CMakeFiles/ObjFormatReader.dir/objformat_reader.cpp.s
 .PHONY : objformat_reader.cpp.s
 
+test/objformat_test.o: test/objformat_test.cpp.o
+
+.PHONY : test/objformat_test.o
+
+# target to build an object file
+test/objformat_test.cpp.o:
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/objformat_test.cpp.o
+.PHONY : test/objformat_test.cpp.o
+
+test/objformat_test.i: test/objformat_test.cpp.i
+
+.PHONY : test/objformat_test.i
+
+# target to preprocess a source file
+test/objformat_test.cpp.i:
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/objformat_test.cpp.i
+.PHONY : test/objformat_test.cpp.i
+
+test/objformat_test.s: test/objformat_test.cpp.s
+
+.PHONY : test/objformat_test.s
+
+# target to generate assembly for a file
+test/objformat_test.cpp.s:
+	$(MAKE) -f CMakeFiles/runtest.dir/build.make CMakeFiles/runtest.dir/test/objformat_test.cpp.s
+.PHONY : test/objformat_test.cpp.s
+
 test/utility_test.o: test/utility_test.cpp.o
 
 .PHONY : test/utility_test.o
@@ -313,6 +340,9 @@ help:
 	@echo "... objformat_reader.o"
 	@echo "... objformat_reader.i"
 	@echo "... objformat_reader.s"
+	@echo "... test/objformat_test.o"
+	@echo "... test/objformat_test.i"
+	@echo "... test/objformat_test.s"
 	@echo "... test/utility_test.o"
 	@echo "... test/utility_test.i"
 	@echo "... test/utility_test.s"

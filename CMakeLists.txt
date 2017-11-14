@@ -8,7 +8,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 set(SOURCE_FILES  structs.h utility.h objformat_reader.cpp objformat_reader.h)
-set(TEST_FILES test/utility_test.cpp)
+set(TEST_FILES test/utility_test.cpp test/objformat_test.cpp)
 
 add_executable(ObjFormatReader main.cpp ${SOURCE_FILES})
 add_executable(runtest ${SOURCE_FILES} ${TEST_FILES})
