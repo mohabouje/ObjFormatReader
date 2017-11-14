@@ -226,3 +226,67 @@ SCENARIO("Loading a basic .obj file") {
         }
     }
 }
+
+struct ObjFileInfo {
+    ObjFileInfo(size_t PositionCount, size_t TriangleCount) : PositionCount(PositionCount),
+                                                              TriangleCount(TriangleCount) {}
+    size_t PositionCount;
+    size_t TriangleCount;
+};
+
+
+SCENARIO("Testing real files") {
+
+    GIVEN("The file test_1.obj that was analyzed with ") {
+        const std::string file_path = "./test/test_1.obj";
+        ObjFileInfo info(8, 12);
+        ObjFormatReader reader;
+        WHEN("We parse the file") {
+            auto error = reader.load_file(file_path);
+            THEN("We should get no error") {
+                REQUIRE(error == ObjFormatReader::NoError);
+            } AND_THEN("The number of positions should be the same") {
+                REQUIRE(reader.object()->v.size() == info.PositionCount);
+            } AND_THEN("The number of indexes to plot should be 3 times the number of triangles") {
+                REQUIRE(reader.object()->indexes.size()  == (info.TriangleCount * Obj::Triangles));
+            }
+        }
+
+    }
+
+
+    GIVEN("The file test_1.obj that was analyzed with ") {
+        const std::string file_path = "./test/test_2.obj";
+        ObjFileInfo info(7895, 14128);
+        ObjFormatReader reader;
+        WHEN("We parse the file") {
+            auto error = reader.load_file(file_path);
+            THEN("We should get no error") {
+                REQUIRE(error == ObjFormatReader::NoError);
+            } AND_THEN("The number of positions should be the same") {
+                REQUIRE(reader.object()->v.size() == info.PositionCount);
+            } AND_THEN("The number of indexes to plot should be 3 times the number of triangles") {
+                REQUIRE(reader.object()->indexes.size()  == (info.TriangleCount * Obj::Triangles));
+            }
+        }
+
+    }
+
+
+    GIVEN("The file test_1.obj that was analyzed with ") {
+        const std::string file_path = "./test/test_3.obj";
+        ObjFileInfo info(24, 36);
+        ObjFormatReader reader;
+        WHEN("We parse the file") {
+            auto error = reader.load_file(file_path);
+            THEN("We should get no error") {
+                REQUIRE(error == ObjFormatReader::NoError);
+            } AND_THEN("The number of positions should be the same") {
+                REQUIRE(reader.object()->v.size() == info.PositionCount);
+            } AND_THEN("The number of indexes to plot should be 3 times the number of triangles") {
+                REQUIRE(reader.object()->indexes.size()  == (info.TriangleCount * Obj::Triangles));
+            }
+        }
+    }
+
+}
