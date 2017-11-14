@@ -225,11 +225,11 @@ SCENARIO("Loading a basic .obj file") {
 
         }
     }
+    remove(my_obj.c_str());
 }
 
 struct ObjFileInfo {
-    ObjFileInfo(size_t PositionCount, size_t TriangleCount) : PositionCount(PositionCount),
-                                                              TriangleCount(TriangleCount) {}
+    ObjFileInfo(size_t PositionCount, size_t TriangleCount) : PositionCount(PositionCount), TriangleCount(TriangleCount) {}
     size_t PositionCount;
     size_t TriangleCount;
 };
@@ -269,7 +269,7 @@ SCENARIO("Testing real files") {
                 REQUIRE(reader.object()->indexes.size()  == (info.TriangleCount * Obj::Triangles));
             }
         }
-
+S
     }
 
 
