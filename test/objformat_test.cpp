@@ -185,4 +185,44 @@ SCENARIO("Loading a basic .obj file") {
 
         }
     }
+
+    GIVEN("A generic file .obj") {
+        outfile.clear();
+        const ObjPosition v = { distribution(generator), distribution(generator), distribution(generator), distribution(generator)};
+        const ObjVn vn = { distribution(generator), distribution(generator), distribution(generator) };
+        const ObjVn vp = { distribution(generator), distribution(generator), distribution(generator) };
+        const ObjVn vt = { distribution(generator), distribution(generator), distribution(generator) };
+
+        const size_t nV = 65, nVn = 56, nVp = 87, nVt = 78;
+        for (size_t i = 0; i < nV; ++i) {
+            outfile << "v " << v[0] <<  " " << v[1] << " " << v[2]  << " " << v[3] << endl;
+        }
+        for (size_t i = 0; i < nVt; ++i) {
+            outfile << "vt " << vt[0] <<  " " << vt[1] << " " << vt[2]   << endl;
+        }
+        for (size_t i = 0; i < nVn; ++i) {
+            outfile << "vn " << vn[0] <<  " " << vn[1] << " " << vn[2]   << endl;
+        }
+        for (size_t i = 0; i < nVp; ++i) {
+            outfile << "vp " << vp[0] <<  " " << vp[1] << " " << vp[2]   << endl;
+        }
+
+        WHEN("We read the file from the parser") {
+            ObjFormatReader reader;
+            auto error = reader.load_file(my_obj);
+            THEN("No error is the return statement") {
+                REQUIRE(error == ObjFormatReader::NoError);
+            } AND_THEN("The number of elements loaded should be the same") {
+                REQUIRE(reader.object()->v.size() == nV);
+                REQUIRE(reader.object()->vn.size() == nVn);
+                REQUIRE(reader.object()->vt.size() == nVt);
+                REQUIRE(reader.object()->vp.size() == nVp);
+            }  AND_THEN("The rest of the fields should be empty") {
+                Obj* o = reader.object();
+                REQUIRE((o->indexes.empty()
+                         && o->vertices.empty()));
+            }
+
+        }
+    }
 }
