@@ -45,50 +45,64 @@ ObjFormatReader::Error ObjFormatReader::load_file(const std::string &file_path) 
     if (file.fail()) return FileUnrecheable;
 
     string current_line;
-    while (getline(file, current_line)) {
-        auto tokens = utility::parser::split_space<list<string>, std::string>(current_line);
-        auto elements = tokens.size();
-        if (!elements) continue;
+    try {
+        while (getline(file, current_line)) {
+            auto tokens = utility::parser::split_space<list<string>, std::string>(current_line);
+            auto elements = tokens.size();
+            if (!elements) continue;
 
-        const string command = tokens.front();
-        tokens.erase(tokens.begin());
-        switch (Command[command]) {
-            case ObjCommands::Definition:
-                break;
-            case ObjCommands::UseMtl:
-                break;
-            case ObjCommands::Position:
-                assert(elements >= 4 && "Expecting 3 parameters for the v parameter, format: v [x] [y] [z] [w| optional]");
-                obj.v.push_back(
-                        utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 4>(tokens.begin(),
-                                                                                                 tokens.end()));
-                break;
-            case ObjCommands::Normal:
-                assert(elements >= 4 && "Expecting 3 parameters for the vn parameter, format: vn [x] [y] [z]");
-                obj.vn.push_back(
-                        utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 3>(tokens.begin(),
-                                                                                                 tokens.end()));
-                break;
-            case ObjCommands::TextureCoordinates:
-                assert(elements >= 3 && "Expecting 2 parameters for the vt paramters, format: vt [x] [y] w| optional]");
-                obj.vt.push_back(
-                        utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 3>(tokens.begin(),
-                                                                                                 tokens.end()));
-                break;
-            case ObjCommands::ParameterSpace:
-                assert(elements >= 3 && "Expecting 2 parameters for the vp parameters, format: vn [x] [y] [z]");
-                obj.vp.push_back(
-                        utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 3>(tokens.begin(),
-                                                                                                 tokens.end()));
-                break;
-            case ObjCommands::Face:
-                assert(elements > 3 && elements <= 5 && "Invalid face, supported triangles and squares");
-                vertices_triangle_fan(load_vertices_from_face(tokens));
-                break;
-            default:
-                break;
+            const string command = tokens.front();
+            tokens.erase(tokens.begin());
+            switch (Command[command]) {
+                case ObjCommands::Definition:
+                    break;
+                case ObjCommands::UseMtl:
+                    break;
+                case ObjCommands::Position:
+                    assert(elements >= 4 && "Expecting 3 parameters for the v parameter, format: v [x] [y] [z] [w| optional]");
+                    obj.v.push_back(
+                            utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 4>(tokens.begin(),
+                                                                                                          tokens.end()));
+                    break;
+                case ObjCommands::Normal:
+                    assert(elements >= 4 && "Expecting 3 parameters for the vn parameter, format: vn [x] [y] [z]");
+                    obj.vn.push_back(
+                            utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 3>(tokens.begin(),
+                                                                                                          tokens.end()));
+                    break;
+                case ObjCommands::TextureCoordinates:
+                    assert(elements >= 3 && "Expecting 2 parameters for the vt paramters, format: vt [x] [y] w| optional]");
+                    obj.vt.push_back(
+                            utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 3>(tokens.begin(),
+                                                                                                          tokens.end()));
+                    break;
+                case ObjCommands::ParameterSpace:
+                    assert(elements >= 3 && "Expecting 2 parameters for the vp parameters, format: vn [x] [y] [z]");
+                    obj.vp.push_back(
+                            utility::parser::to_arithmetic_array<list<string>::const_iterator, sample, 3>(tokens.begin(),
+                                                                                                          tokens.end()));
+                    break;
+                case ObjCommands::Face:
+                    assert(elements > 3 && elements <= 5 && "Invalid face, supported triangles and squares");
+                    vertices_triangle_fan(load_vertices_from_face(tokens));
+                    break;
+                default:
+                    break;
 
+            }
         }
+
+    } catch(const std::invalid_argument& e) {
+        cerr << "Error while parsing line, invalid argument: " << current_line << endl;
+        cerr << "Catch exception: " << e.what() << endl;
+        return FileCorrupted;
+    } catch(const std::out_of_range& e){
+        cerr << "Error while parsing line, parameter out of range: " << current_line << endl;
+        cerr << "Catch exception: " << e.what() << endl;
+        return FileCorrupted;
+    } catch (...) {
+        cerr << "Unknown error while parsing " << file_path << endl;
+        return Unknown;
     }
 
     file.close();
