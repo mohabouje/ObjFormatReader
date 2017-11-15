@@ -53,9 +53,13 @@ On Mac OS:
 
     brew install google-benchmark
 
-On Linux:
+On generic Unix & Linux systems:
 
-    sudo apt-get install libgtest0 libgtest-dev
+    git clone --recursive https://github.com/google/benchmark.git
+    cd benchmark
+    cmake .
+    make
+    sudo make install
 
 **How to run it?**
 
