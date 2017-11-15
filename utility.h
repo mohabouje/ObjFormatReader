@@ -143,7 +143,7 @@ namespace utility {
         };
 
         template <class _ForwardIterator, typename T, std::size_t N>
-        constexpr typename std::enable_if<std::is_arithmetic<T>::value, std::array<T,N>>::type
+        inline typename std::enable_if<std::is_arithmetic<T>::value, std::array<T,N>>::type
         to_arithmetic_array(const _ForwardIterator& b, const _ForwardIterator& e)  {
             std::array<T,N> tmp;
             std::transform(b, e, std::begin(tmp), [](const std::string& str) {

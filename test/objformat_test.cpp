@@ -2,13 +2,15 @@
 // Created by Mohammed Boujemaoui on 14/11/2017.
 //
 
-#include <fstream>
-#include <random>
-#include <Catch2/include/catch.hpp>
 #include "objformat_reader.h"
 
+#include <fstream>
+#include <random>
+#include <chrono>
+#include <Catch2/include/catch.hpp>
+
 using namespace std;
-using namespace chrono;
+using namespace std::chrono;
 SCENARIO("Testing object format parser") {
     const string my_file = "test.thing";
     const string my_obj = "test.obj";
