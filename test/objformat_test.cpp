@@ -186,6 +186,23 @@ SCENARIO("Loading a basic .obj file") {
         }
     }
 
+
+    GIVEN("An invalid vp line") {
+        outfile.clear();
+        const size_t num = 1000;
+        const ObjVn vp = {{ distribution(generator), distribution(generator), distribution(generator) }};
+        for (size_t i = 0; i < num; ++i) {
+            outfile << "vp " << vp[0] <<  " " << "exception_me" << " " << vp[2]   << endl;
+        }
+        WHEN("We read the file from the parser") {
+            ObjFormatReader reader;
+            auto error = reader.load_file(my_obj);
+            THEN("The error should be file corrupted") {
+                REQUIRE(error == ObjFormatReader::FileCorrupted);
+            }
+        }
+    }
+
     GIVEN("A generic file .obj") {
         outfile.clear();
         const ObjPosition v = {{ distribution(generator), distribution(generator), distribution(generator), distribution(generator) }};
@@ -269,7 +286,6 @@ SCENARIO("Testing real files") {
                 REQUIRE(reader.object()->indexes.size()  == (info.TriangleCount * Obj::Triangles));
             }
         }
-S
     }
 
 

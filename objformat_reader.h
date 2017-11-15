@@ -11,7 +11,7 @@ class ObjFormatReader {
 
 public:
     enum Error {
-        NoError = 0, FileNotExist, FormatNotSupported, FileEmpty, FileUnrecheable, Unknown
+        NoError = 0, FileNotExist, FormatNotSupported, FileEmpty, FileUnrecheable, FileCorrupted, Unknown
     };
     ObjFormatReader() = default;
     virtual ~ObjFormatReader() = default;
