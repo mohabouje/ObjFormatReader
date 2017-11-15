@@ -85,7 +85,7 @@ void BM_Arithmetic_String_To_Arithmetic_Array(benchmark::State &state) {
 }
 
 static void BM_Load_Obj(benchmark::State &state) {
-    const std::string tmp = "/Users/mohabouje/Downloads/test_2.obj";
+    const std::string tmp = "./test/test_2.obj";
     ObjFormatReader reader;
     for (auto _ : state)
         reader.load_file(tmp);
